@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 // Macros for API spec.
 
@@ -18,7 +19,7 @@
 
 #define GET_KNOB_LEFT_OP(data)  (((data) & LEFT_OP_MASK) >> LEFT_OP_SHIFT)
 #define GET_KNOB_RIGHT_OP(data) (((data) & RIGHT_OP_MASK) >> RIGHT_OP_SHIFT)
-#define GET_KNOB_ADD(data)      ((data) & ADD_MASK) >> ADD_SHIFT)
+#define GET_KNOB_ADD(data)      (((data) & ADD_MASK) >> ADD_SHIFT)
 #define GET_KNOB_MUL(data)      (((data) & MUL_MASK) >> MUL_SHIFT)
 #define GET_KNOB_DIV(data)      (((data) & DIV_MASK) >> DIV_SHIFT)
 #define GET_KNOB_SUB(data)      (((data) & SUB_MASK) >> SUB_SHIFT)
@@ -29,12 +30,12 @@
 
 // HW spec defines.
 
-#define USER_REG_INP_1          (0xa0000000)
-#define USER_REG_INP_2          (0xa0000004)
-#define USER_REG_OUT_1          (0xa0000008)
+#define USER_REG_INP_1          ((unsigned int *)0xa0000000)
+#define USER_REG_INP_2          ((unsigned int *)0xa0000004)
+#define USER_REG_OUT_1          ((unsigned int *)0xa0000008)
 
-volatile const int *userInpReg1 = USER_REG_INP_1;
-volatile const int *userInpReg2 = USER_REG_INP_2;
+volatile const unsigned int *userInpReg1 = USER_REG_INP_1;
+volatile const unsigned int *userInpReg2 = USER_REG_INP_2;
 
 int *userOutReg1 = USER_REG_OUT_1;
 
@@ -67,7 +68,7 @@ bool readKnobInputs(unsigned *dataPtr)
     
 
     // get right operand. 
-    value = value & 0xffff;
+    value = inp_reg1_val & 0xffff;
     for (int i = 0; i < 16; i++)
     {
         if (value & 1 == 1)
@@ -106,6 +107,9 @@ bool readKnobInputs(unsigned *dataPtr)
 
 void writeLedOutput(unsigned data)
 {
+//    printf("Answer is : %d", data >> 1);
+//    printf("LED Error is : %u", data & 1);
+
     *userOutReg1 = data;
 }
 
@@ -158,7 +162,7 @@ int main(void)
         }
 
         // Handle overflow situation.
-        if ((result > BYTE_MAX)) || (result < BYTE_MIN))
+        if ((result > BYTE_MAX) || (result < BYTE_MIN))
         {
             b_error = true;
             result = 0;
@@ -167,4 +171,7 @@ int main(void)
         // Finally, program the hardware to reflect the result.
         writeLedOutput(((result << 1) | (unsigned int) b_error));
     }
+
+    return 0;
+
 }
