@@ -1,0 +1,68 @@
+Addition Case
+Inputs:
+- Left Operand Knob = 2,
+- Operator Knob = "+",
+- Right Operand Knob = 3
+Outputs:
+- Result LEDs should display 5 in binary as the result, error LED should be
+OFF
+
+Multiplication Case
+Inputs:
+- Left Operand Knob = 3
+- Operator Knob = "x"
+- Right Operand Knob = 3
+Outputs:
+- Result LEDs should display 9 in binary as the result, error LED should be
+OFF
+Add more test cases here...
+
+Subtraction Case
+Inputs:
+- Left Operand Knob = 3
+- Operator Knob = "-"
+- Right Operand Knob = 4
+Outputs:
+- Result LEDs should display -1 in binary as the result, error LED should be
+OFF
+
+Subtraction Case
+Inputs:
+- Left Operand Knob = 3
+- Operator Knob = "-"
+- Right Operand Knob = 3
+Outputs:
+- Result LEDs should display 0 in binary as the result, error LED should be
+OFF
+
+Division Case
+Inputs:
+- Left Operand Knob = 3
+- Operator Knob = "/"
+- Right Operand Knob = 2
+Outputs:
+- Result LEDs should display 1 in binary as the result, error LED should be
+OFF
+
+Multiplication Overflow Case
+Inputs:
+- Left Operand Knob = 16
+- Operator Knob = "*"
+- Right Operand Knob = 16
+Outputs:
+- Result LEDs should display 0 in binary as the result, error LED should be
+ON
+
+Division by zero Case
+Inputs:
+-Left Operand Knob = 5
+- Operator Knob = "/"
+- RIght Operand Knob = 0
+Outputs:
+- Result LEDs should display 0 in binary as the result, error LED should be
+ON
+
+
+
+
+

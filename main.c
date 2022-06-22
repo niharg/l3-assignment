@@ -146,7 +146,15 @@ int main(void)
         }
         else if (b_div)
         {
-            result = left_operand / right_operand;
+            if (right_operand == 0)
+            {
+                b_error = true;
+                result = 0;
+            }
+            else
+            {
+                result = left_operand / right_operand;
+            }
         }
 
         // Handle overflow situation.
